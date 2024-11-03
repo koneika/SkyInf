@@ -1,7 +1,9 @@
-# version 0.0.0
-import pygame
+# version 0.0.1
 import numpy
 import time
+import math
+import pygame
+import os
 
 # Looks like something custome.
 # Sure, because in python we
@@ -9,129 +11,206 @@ import time
 # things which from c++ or java.
 # So, that's why i use these
 # functions, because i want
-# feel free, when i'll writing a
+# feel free, when i write a
 # code
 
 # its easy to use this functions
 # here is two dimentional array, like in c++
-
-# updateMatrix(firstSize, secondSize)
-def updateMatrix(firstVariable, secondVariable):
-    for i in range(0, firstVariable):
-        for j in range(0, secondVariable):
-            pass
-
-# createIntMatrix(firstSize, secondSize)
-def createIntMatrix(firstVariable, secondVariable):
-    return numpy.zeros((firstVariable, secondVariable), dtype=int)
-
-# createIntMatrixAndPutValue(firstSize, secondSize, yourValue)
-def createIntMatrixAndPutValue(firstVariable, secondVariable, value):
-    Matrix = createIntMatrix(firstVariable, secondVariable)
-    for i in range(0, firstVariable):
-        for j in range(0, secondVariable):
-            Matrix[i, j] = value
-    return Matrix
-
-# frameRate(60)
-def frameRate(variable):
-    time.sleep(variable/1000)
-
-
-
-
-def fpsCounter(putConstIntTimeTime, counter, counterForAverage, counterForAverage2):
-    if putConstIntTimeTime == int(time.time()):
-        counter += 1
-        # for i in range():
-    else:
-        print("fps: ", counter)
-        counterForAverage += 1
-        counterForAverage2 += counter
-        counter = 0
-        putConstIntTimeTime += 1
-        print("average fps: ", counterForAverage2/counterForAverage)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def createIntMatrix(rows, cols, value=0):
+    return numpy.full((rows, cols), value, dtype=int)
 
 # for fps counting
 real_time = int(time.time())
+real_time_float = time.time()
 counter = 0
 counterForAverage = 0
 counterForAverage2 = 0
 
-def fpsLimit(count):
+def fpsCounter(x, y):
     global real_time
+    global real_time_float
     global counter
     global counterForAverage
     global counterForAverage2
 
-    time.sleep(1)
-    for i in range(count):
-        # for fps counting
-        if real_time == int(time.time()):
-            counter += 1
-            # for i in range():
-        else:
-            print("fps: ", counter)
-            counterForAverage += 1
-            counterForAverage2 += counter
+    # # # print(real_time_float)
+    # # if real_time == int(time.time()):
+    # counter += 1
+    #     # for i in range():
+    # # else:
+    
+    # counterForAverage += 1
+    # counterForAverage2 += 1
+    # counter = 0
+    # # real_time += 1
 
-            # time.sleep(60/counter)
 
-            counter = 0
-            real_time += 1
-            print("average fps: ", counterForAverage2/counterForAverage)
 
-# main
 
-while True:
-    fpsLimit(60)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    # os.system("cls")
+    # os.system("clear")
+
+    # counter += 1
+
+    # counter -= 10
+    # if counter == 10:
+    #     print("fps: ", counter)
+    #     return counter
+    
+
+    # print(real_time, "==", int(time.time()))
+
+    # if real_time == int(time.time()):
+    #     print("hi every 1 sec")
+    #     real_time += 1
+
+    #     if real_time == ((int(time.time())) + 10):
+    #         real_time -= 10
+
+    # counter += 10
+    # if counter == 10:
+    #     print("fps: ", counter)
+    #     counter = 0
+    # for i in range():
+    # else:
+        # for beautiful show my fps counter and etc.
+        # os.system("cls")
+        # os.system("clear")
+
+    
+    # counterForAverage += 1
+    # counterForAverage2 += counter
+    
+    # real_time += 1
+    # print("average fps: ", counterForAverage2/counterForAverage)
+    print("coordinates: ", x, y)
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # else:
+        # for beautiful show my fps counter and etc.
+        # os.system("cls")
+        # os.system("clear")
+    
+    # if real_time == int(time.time()):
+    #     print("fps: ", counter)
+    # else:
+    #     print("fps: ", counter)
+    
+    # print("coordinates: ", x, y)
+    # os.system("cls")
+    # os.system("clear")
+    
+        
+    # print("average fps: ", counterForAverage2/counterForAverage)
+    
+    
+def coordinateCounter(x, y):
+    # global real_time
+
+    # print(real_time)
+
+    # await fpsCounter(x, y)
+    # time.sleep(0.1)
+    # print("coordinates: ", x, y)
+    # if real_time == int(time.time()):
+    #     print("fps: ", counter)
+    #     real_time += 1
+    # if real_time == int(time.time()):
+    #     print("hi")
+    time.sleep(0.1)
+
+
+def main():
+    global real_time
+    global real_time_float
+    global counter
+    global counterForAverage
+    global counterForAverage2
+    
+    width, height = 800, 600
+    black = (0, 0, 0)
+    white = (255, 255, 255)
+    x, y = 0, 0
+
+    pygame.init()
+    screen = pygame.display.set_mode((width, height))
+    clock = pygame.time.Clock()
+    
+
+    while True:
+        time.sleep(0.1)
+        
+        pygame.event.pump()
+        x, y = pygame.mouse.get_pos()
+        # map = createIntMatrix(100, 100, 1)
+        # width += 1
+
+        screen.fill(black)
+
+        for i in range(int(math.pow(2, 10))):
+            pygame.draw.line(screen, white, (0,0), (width//2, height//2))
+        
+        #await coordinateCounter(x, y)
+        print(fpsCounter(x, y))
+        # counter += 1
+        # print(counter)
+        pygame.display.flip()
+        
+        # clock.tick(60)
+    
+        
+
+if __name__ == "__main__":
+    main()
+    
+    
+
+
+
+    
 
     
 
@@ -184,32 +263,3 @@ while True:
 
 
 
-# we create matrix
-# map = createIntMatrixAndPutValue(100, 100, 1)
-# print(map)
-# fpsCounter(constTime, 0, 0, 0)
-
-# fpsCounter(not function)
-
-# real_time = int(time.time())
-# counter = 0
-# counterForAverage = 0
-# counterForAverage2 = 0
-
-# counter, counterForAverage, counterForAverage2 = 0, 0, 0
-
-# pygame.init()
-
-# for i in range(0, 100):
-#     for j in range(0, 100):
-#         map[i, j] = 0
-
-# while True:
-#     time.sleep(0.01)
-
-# pygame.init()
-
-# for j in range(0, 100):   
-#     for i in range(0, 100):
-#         if i == 100-1:
-#             pass
