@@ -1,4 +1,4 @@
-# version 0.0.3
+# version 0.0.5
 import numpy
 import time
 import math
@@ -20,7 +20,7 @@ def coordinateCounter(x, y):
     os.system("clear")
     return "coordinates: ", x, y
 
-def fpsLimit(fpsForLimit: float = 0):
+def fpsCounter(fpsForLimit: float = 0):
 
     if fpsForLimit == 0:
         # counter += 1
@@ -40,6 +40,10 @@ def fpsLimit(fpsForLimit: float = 0):
     # return true ms from fps counter here
     # but im the next time or good mood
 
+    # also i prepare, the ms isn's work as
+    # expected, so, don't belive the ms
+    # because it isn't true
+
     # also i wanted to do optimized counter
     # for example
     # update my x and y 10 times per second
@@ -47,7 +51,7 @@ def fpsLimit(fpsForLimit: float = 0):
     # update it every 1 time per second
 
 def debug(x, y, fpsForLimit):
-    print(fpsLimit(fpsForLimit), coordinateCounter(x, y))
+    print(fpsCounter(fpsForLimit), coordinateCounter(x, y))
 
 def square(size=0):
     global width, height
@@ -82,7 +86,7 @@ def rect(size=0):
 
     cx, cy = width // 2, height // 2
 
-    pygame.draw.rect(screen, white, (cx, cy, size, size), width=0)
+    pygame.draw.rect(screen, white, (0, 0, size, size), width=0)
 
 def main():
     global width, height
@@ -109,8 +113,23 @@ def main():
         screen.fill(black)
 
         # for i in range(int(math.pow(2, 10))):
+
         
-        rect(200+size)
+        # no, wait, the first try, just create a move by map, and
+        # it should bounded with x + y + mouse + ... 
+        ###
+        # i mean create a new function like mouse move by map
+        # when you in the any of edges in your screen, then
+        # your ccordinate in the world - changing
+        # so, x_mouse + y_mouse + x + y = should be connected
+        # and work together
+        # then this, below:
+        ###
+        # commentar of the next stage: change square() function, by rect
+        # function like in pygame
+        # that's all
+        ### 
+        pygame.draw.rect(screen, white, (0, 0, 200+size, 200+size), width=0)
         square(200+size)
         size += 1
 
