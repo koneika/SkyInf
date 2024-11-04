@@ -1,9 +1,14 @@
-# version 0.0.2
+# version 0.0.3
 import numpy
 import time
 import math
 import pygame
 import os
+
+width, height = 800, 800
+black = (0, 0, 0)
+white = (255, 255, 255)
+screen = pygame.display.set_mode((width, height))
 
 def createIntMatrix(rows, cols, value=0):
     return numpy.full((rows, cols), value, dtype=int)
@@ -23,7 +28,7 @@ def fpsLimit(fpsForLimit: float = 0):
     elif(fpsForLimit != 0):
         time.sleep(1/fpsForLimit)
         os.system("clear")
-        return "ms: ", 1/fpsForLimit
+        return "ms: ", 1/fpsForLimit, "fps: ", "haha, where your time?"
     #elif()
     # fps counter
     # not work, because time in python = don't care
@@ -41,19 +46,39 @@ def fpsLimit(fpsForLimit: float = 0):
 def debug(x, y):
     print(fpsLimit(60), coordinateCounter(x, y))
 
+def square(size=0):
+    global width, height
+    global black, white
+    global screen
+
+    cx, cy = width // 2, height // 2
+    firstRectPoint = (cx - size, cy - size)
+    secondRectPoint = (cy + size, cy + size)
+
+
+    print(firstRectPoint[0], firstRectPoint[1])
+    print(secondRectPoint[0], secondRectPoint[1])
+    pygame.draw.line(screen, white, (firstRectPoint[0], firstRectPoint[1]), (secondRectPoint[0], secondRectPoint[1]))
+    # pygame.draw.line(screen, color, (x1, y1), (x2, height-y2))
+    # pygame.draw.line(screen, color, (x1, y1), (x2, height-y2))
+    # pygame.draw.line(screen, color, (x1, y1), (x2, y2))
+    # pygame.draw.line(screen, color, (x1+x2, y1), (x2, y2))
+    # pygame.draw.line(screen, color, (x1+x2, y1+y2), (x2-x2, y2))
+    # pygame.draw.line(screen, color, (x1, y1+y2), (x2-x2, y2))
+
 def main():
-    
-    width, height = 800, 600
-    black = (0, 0, 0)
-    white = (255, 255, 255)
+    global width, height
+    global black, white
+    global screen
+
     x, y = 0, 0
     counter = 0
     # fpsLimit = 10
 
     pygame.init()
-    screen = pygame.display.set_mode((width, height))
-    clock = pygame.time.Clock()
     
+    clock = pygame.time.Clock()
+    print(pygame.display.set_mode((width, height)))
 
     while True:
         pygame.event.pump()
@@ -63,8 +88,8 @@ def main():
 
         screen.fill(black)
 
-        for i in range(int(math.pow(2, 10))):
-            pygame.draw.line(screen, white, (0,0), (width//2, height//2))
+        # for i in range(int(math.pow(2, 10))):
+        square(600)
 
         
         pygame.display.flip()
