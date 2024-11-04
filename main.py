@@ -1,4 +1,12 @@
-# version 0.0.7
+# version 0.0.8
+#
+#########################################
+# dont delete the comments which anywhere, please
+######################################### 
+#
+# probably see version 0.0.4-0.0.6
+# for more understand your wishes 
+# and just the comments
 import numpy
 import time
 import pygame
