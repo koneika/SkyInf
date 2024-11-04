@@ -1,17 +1,24 @@
-# version 0.0.5
+# version 0.0.6
 import numpy
 import time
 import math
 import pygame
 import os
 
-width, height = 800, 600
+pygame.init()
+width, height = 1920, 1080
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+clock = pygame.time.Clock()
+font = pygame.font.Font(None, 36)
+text = font.render("Hello, Pygame!", True, (255, 255, 255))
+text_rect = text.get_rect(center=(400, 300))
+
 black = (0, 0, 0)
 white = (255, 255, 255)
 red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
-screen = pygame.display.set_mode((width, height))
+
 
 def createIntMatrix(rows, cols, value=0):
     return numpy.full((rows, cols), value, dtype=int)
@@ -91,27 +98,27 @@ def rect(size=0):
 def main():
     global width, height
     global black, white
-    global screen
+    global screen, clock, font, text, text_rect
 
     cx, cy = width // 2, height // 2
     x, y = 0, 0
     counter = 0
     # fpsLimit = 10
     size = 0
+    # print(pygame.display.set_mode((0, 0), pygame.FULLSCREEN))
 
-    pygame.init()
-    
-    clock = pygame.time.Clock()
-    print(pygame.display.set_mode((width, height)))
-
-    while True:
+    running = True
+    while running:
         pygame.event.pump()
-
+        keys = pygame.key.get_pressed()
         x, y = pygame.mouse.get_pos()
         debug(x, y, 60)
 
-        screen.fill(black)
+        if keys[pygame.K_ESCAPE]:
+            running = False
 
+        screen.fill(black)
+        screen.blit(text, text_rect)
         # for i in range(int(math.pow(2, 10))):
 
         
@@ -131,7 +138,7 @@ def main():
         ### 
         pygame.draw.rect(screen, white, (0, 0, 200+size, 200+size), width=0)
         square(200+size)
-        size += 1
+        # size += 1
 
         
         pygame.display.flip()
