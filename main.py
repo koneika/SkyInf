@@ -5,9 +5,12 @@ import math
 import pygame
 import os
 
-width, height = 800, 800
+width, height = 800, 600
 black = (0, 0, 0)
 white = (255, 255, 255)
+red = (255, 0, 0)
+green = (0, 255, 0)
+blue = (0, 0, 255)
 screen = pygame.display.set_mode((width, height))
 
 def createIntMatrix(rows, cols, value=0):
@@ -28,7 +31,7 @@ def fpsLimit(fpsForLimit: float = 0):
     elif(fpsForLimit != 0):
         time.sleep(1/fpsForLimit)
         os.system("clear")
-        return "ms: ", 1/fpsForLimit, "fps: ", "haha, where your time?"
+        return "ms: ", 1/fpsForLimit, "fps: ", "haha, where is your time?"
     #elif()
     # fps counter
     # not work, because time in python = don't care
@@ -43,8 +46,8 @@ def fpsLimit(fpsForLimit: float = 0):
     # but fps
     # update it every 1 time per second
 
-def debug(x, y):
-    print(fpsLimit(60), coordinateCounter(x, y))
+def debug(x, y, fpsForLimit):
+    print(fpsLimit(fpsForLimit), coordinateCounter(x, y))
 
 def square(size=0):
     global width, height
@@ -53,12 +56,18 @@ def square(size=0):
 
     cx, cy = width // 2, height // 2
     firstRectPoint = (cx - size, cy - size)
-    secondRectPoint = (cy + size, cy + size)
+    secondRectPoint = (cx + size, cy + size)
 
 
-    print(firstRectPoint[0], firstRectPoint[1])
-    print(secondRectPoint[0], secondRectPoint[1])
-    pygame.draw.line(screen, white, (firstRectPoint[0], firstRectPoint[1]), (secondRectPoint[0], secondRectPoint[1]))
+    # print(firstRectPoint[0], firstRectPoint[1])
+    
+    pygame.draw.line(screen, red, (firstRectPoint[0], firstRectPoint[1]), (secondRectPoint[0], height-secondRectPoint[1]))
+    pygame.draw.line(screen, red, (secondRectPoint[0], height-secondRectPoint[1]), (secondRectPoint[0], secondRectPoint[1]))
+    pygame.draw.line(screen, red, (secondRectPoint[0], secondRectPoint[1]), (firstRectPoint[0], height-firstRectPoint[1]))
+    pygame.draw.line(screen, red, (firstRectPoint[0], height-firstRectPoint[1]), (firstRectPoint[0], firstRectPoint[1]))
+
+
+    # print(rf"pygame.draw.line({screen}, {white}, ({cx}, {cy}), ({secondRectPoint[0]}, {secondRectPoint[1]}))")
     # pygame.draw.line(screen, color, (x1, y1), (x2, height-y2))
     # pygame.draw.line(screen, color, (x1, y1), (x2, height-y2))
     # pygame.draw.line(screen, color, (x1, y1), (x2, y2))
@@ -66,14 +75,25 @@ def square(size=0):
     # pygame.draw.line(screen, color, (x1+x2, y1+y2), (x2-x2, y2))
     # pygame.draw.line(screen, color, (x1, y1+y2), (x2-x2, y2))
 
+def rect(size=0):
+    global width, height
+    global black, white
+    global screen
+
+    cx, cy = width // 2, height // 2
+
+    pygame.draw.rect(screen, white, (cx, cy, size, size), width=0)
+
 def main():
     global width, height
     global black, white
     global screen
 
+    cx, cy = width // 2, height // 2
     x, y = 0, 0
     counter = 0
     # fpsLimit = 10
+    size = 0
 
     pygame.init()
     
@@ -84,12 +104,15 @@ def main():
         pygame.event.pump()
 
         x, y = pygame.mouse.get_pos()
-        debug(x, y)
+        debug(x, y, 60)
 
         screen.fill(black)
 
         # for i in range(int(math.pow(2, 10))):
-        square(600)
+        
+        rect(200+size)
+        square(200+size)
+        size += 1
 
         
         pygame.display.flip()
