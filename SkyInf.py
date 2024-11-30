@@ -1,14 +1,9 @@
-# probably see version 0.0.4-0.0.6
-# for more understand your wishes 
-# and just the comments
 import numpy
 import time
 import pygame
 import os
 
 class SkyInf:
-    # def setScreenSize(self, x, y, fullscreen=False):
-    # there is a problem on x and y
     def __init__(self, x, y, fullscreen=False):
         pygame.init()
         if(fullscreen):
@@ -35,20 +30,11 @@ class SkyInf:
             return "ms: ", 1/fpsForLimit, "fps: ", "haha, where is your time?"
         #elif()
 
-    def square(self, color, size=0):
-        # i'm not sure is it okay or bad
-        # x, y = self.x, self.y
-        self.x, self.y = self.width // 2, self.height // 2
-        firstRectPoint = (self.x - size, self.y - size)
-        secondRectPoint = (self.x + size, self.y + size)
-        
-        pygame.draw.line(self.screen, color, (firstRectPoint[0], firstRectPoint[1]), (secondRectPoint[0], self.height-secondRectPoint[1]))
-        pygame.draw.line(self.screen, color, (secondRectPoint[0], self.height-secondRectPoint[1]), (secondRectPoint[0], secondRectPoint[1]))
-        pygame.draw.line(self.screen, color, (secondRectPoint[0], secondRectPoint[1]), (firstRectPoint[0], self.height-firstRectPoint[1]))
-        pygame.draw.line(self.screen, color, (firstRectPoint[0], self.height-firstRectPoint[1]), (firstRectPoint[0], firstRectPoint[1]))
+    def square(self, x, y, color, size=0):        
+        pygame.draw.line(self.screen, color, (x+50, y+50),(x, y))
 
     def main(self):
-        self.x, self.y = 0, 0
+        self.x, self.y = self.width // 2, self.height // 2
         self.size = 0
         fpsLimit = 60 # but its not work as you expected, use clock for it
 
@@ -57,7 +43,6 @@ class SkyInf:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-            # pygame.event.pump()
             keys = pygame.key.get_pressed()
             if keys[pygame.K_ESCAPE]:
                 running = False
@@ -66,12 +51,8 @@ class SkyInf:
             print(self.fpsCounter(fpsLimit), self.coordinateCounter(x, y))
             self.screen.fill(pygame.Color("black"))
 
-            # text = self.font.render("Hello, Pygame!", True, (255, 255, 255))
-            # text_rect = text.get_rect(center=(200, 300))
-            # self.screen.blit(text, text_rect)
-
-            self.square(pygame.Color("red"), 
-                        self.size+10)
+            self.square(self.x, self.y, pygame.Color("red"), self.size)
+            self.square(self.x+50, self.y+50, pygame.Color("red"), self.size)
             self.size += 1
             pygame.display.flip()
 
